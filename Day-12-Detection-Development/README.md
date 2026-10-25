@@ -1,4 +1,4 @@
-﻿# Day 12 — Encoded PowerShell Detection Validation
+﻿# Day 12 - Encoded PowerShell Detection Validation
 
 ## Project Overview
 
@@ -13,7 +13,7 @@ Identify PowerShell execution involving the
 
 ## Data Source
 
-- Sysmon Event ID 1 — Process Creation
+- Sysmon Event ID 1 - Process Creation
 - Windows PowerShell
 - Controlled Windows laboratory
 
