@@ -1,1 +1,2 @@
-Test_ID,Scenario,Telemetry_Source,Expected_Detection,Observed_Detection,Result,Notes
+"TestID","EventID","Scenario","ValidationMethod","Expected","Actual","Passed","Disposition"
+"D12-T01","1","Encoded PowerShell execution","Local PowerShell regex check","True","True","True","Authorized lab activity"

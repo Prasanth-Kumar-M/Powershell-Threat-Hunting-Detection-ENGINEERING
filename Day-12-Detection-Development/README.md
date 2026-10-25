@@ -1,48 +1,58 @@
-# Day 12 — PowerShell Detection Development
+﻿# Day 12 — Encoded PowerShell Detection Validation
 
-## Project overview
+## Project Overview
 
-This lab documents the development and evidence-handling workflow for a PowerShell-focused detection investigation in a controlled Windows environment. It is part of the **PowerShell Threat Hunting & Detection Engineering** project (Days 11–14).
-
-**Status:** Public documentation prepared; detection logic, event interpretation, and test outcomes require verification against retained lab evidence.
+This investigation validates a PowerShell command-line
+indicator against an actual Sysmon process creation event
+collected in an authorized Windows laboratory.
 
 ## Objective
 
-- Examine Windows process-creation telemetry relevant to PowerShell execution.
-- Develop and assess detection logic using observed or controlled test cases.
-- Distinguish suspicious indicators from confirmed malicious activity.
-- Preserve original evidence privately and publish only reviewed, sanitized findings.
+Identify PowerShell execution involving the
+-EncodedCommand or -enc command-line option.
 
-## Environment and evidence
+## Data Source
 
-The exercise uses Windows lab telemetry. A private Day 12 evidence folder contains an evidence-hash CSV and a Sysmon XML evidence file, as observed in the local file listing. Original XML contents, event IDs, command lines, timestamps, and detection outcomes have **not** been independently verified for this public summary.
+- Sysmon Event ID 1 — Process Creation
+- Windows PowerShell
+- Controlled Windows laboratory
 
-## Methodology
+## Detection Method
 
-1. Collect and preserve relevant telemetry in the controlled lab.
-2. Review process image, parent process, command line, and other available fields.
-3. Define detection conditions and expected behavior for each test case.
-4. Execute controlled positive and negative test cases, where available.
-5. Compare actual observations with expectations and record limitations.
-6. Sanitize any data selected for public release.
+A case-insensitive PowerShell regular expression was
+evaluated against the CommandLine field of the event.
 
-## Results
+The validation checked for the presence of an encoded
+PowerShell command-line option.
 
-See [`sanitized-results.csv`](sanitized-results.csv) for a **blank reporting template**. No pass/fail outcome is asserted until test evidence is reviewed. The CSV is not a substitute for the original event records.
+## Validation Results
 
-## Evidence handling
+| Test ID | Expected | Actual | Passed |
+|---------|----------|--------|--------|
+| D12-T01 | True | True | True |
 
-Original Sysmon XML and hash records are retained locally in `Private-Evidence/Day12` and are intentionally excluded from this public repository. Before publishing additional artifacts, remove or generalize user names, domain names, host names, private IP addresses, SIDs, credentials, and other sensitive details. Preserve original files unchanged and verify hashes when applicable.
+The observed event matched the detection indicator.
+
+## Analyst Assessment
+
+The activity was generated within an authorized lab.
+The presence of an encoded PowerShell command does not,
+by itself, establish malicious intent.
+
+Disposition: Authorized laboratory activity.
 
 ## Limitations
 
-- Presence of a PowerShell command or a matching detection condition alone does not establish malicious intent.
-- This README does not claim detection accuracy, completeness, or production readiness.
-- The original telemetry and exact test cases must be reviewed before reporting validated findings.
+- One captured positive event was validated.
+- False-positive and false-negative rates were not measured.
+- No production SIEM alert was tested.
+- Additional negative and variant tests are required.
 
-## Next steps
+## Evidence Handling
 
-- Confirm the Day 12 detection logic and original test outcomes.
-- Replace the CSV template rows with verified, sanitized results.
-- Document false positives, false negatives, and any rule improvements.
-- Link the final Day 12 findings to the Day 13 Sigma rule and Day 14 tuning work.
+Original event XML and evidence hashes remain private.
+Only sanitized findings are published.
+
+## Files
+
+- sanitized-results.csv — Validation result
