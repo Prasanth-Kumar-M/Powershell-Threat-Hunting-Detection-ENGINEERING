@@ -1,1 +1,29 @@
-
+﻿title: PowerShell Execution With Encoded Command
+id: 9fd2a872-82a4-4f98-9c12-b420cd927641
+status: experimental
+description: Detects PowerShell processes launched with the full EncodedCommand parameter.
+author: SOC Detection Engineering Lab
+date: 2026-10-25
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_image:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+    selection_command:
+        CommandLine|contains: '-EncodedCommand'
+    condition: selection_image and selection_command
+fields:
+    - Image
+    - CommandLine
+    - ParentImage
+    - User
+falsepositives:
+    - Legitimate administrative automation
+    - Authorized testing and troubleshooting
+level: medium
+tags:
+    - attack.execution
+    - attack.t1059.001
