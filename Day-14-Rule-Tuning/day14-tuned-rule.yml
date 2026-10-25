@@ -1,0 +1,31 @@
+﻿title: PowerShell Execution With Encoded Command - Tuned
+id: 4d4e15b2-7a30-4f5e-a0e7-42b42ec8f319
+status: experimental
+description: Detects PowerShell process creation using the full EncodedCommand parameter or the enc abbreviation.
+author: SOC Detection Engineering Lab
+date: 2026-10-25
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_image:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+  selection_command:
+    CommandLine|contains:
+      - '-EncodedCommand'
+      - '-enc '
+  condition: selection_image and selection_command
+fields:
+  - Image
+  - CommandLine
+  - ParentImage
+  - User
+falsepositives:
+  - Legitimate administrative automation
+  - Authorized testing and troubleshooting
+level: medium
+tags:
+  - attack.execution
+  - attack.t1059.001
