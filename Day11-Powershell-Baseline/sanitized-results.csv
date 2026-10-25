@@ -1,0 +1,6 @@
+﻿"RecordId","EventID","Process","ParentProcess","Classification"
+"108979","1","Notepad.exe","powershell.exe","Observed lab process creation"
+"108977","1","Notepad.exe","powershell.exe","Observed lab process creation"
+"108974","1","Notepad.exe","powershell.exe","Observed lab process creation"
+"108972","1","Notepad.exe","powershell.exe","Observed lab process creation"
+"108871","1","powershell.exe","powershell.exe","Observed lab process creation"
