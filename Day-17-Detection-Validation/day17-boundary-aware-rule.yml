@@ -1,0 +1,36 @@
+﻿title: PowerShell Encoded Command - Boundary-Aware Experimental
+id: 36ef6f48-dbc2-4e98-949f-ae846d7312c0
+status: experimental
+description: Detects PowerShell process creation with selected encoded-command argument indicators.
+author: SOC Detection Engineering Lab
+date: 2026-10-28
+
+logsource:
+    category: process_creation
+    product: windows
+
+detection:
+    selection_image:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+    selection_command:
+        CommandLine|re|i: '(^|[ \t])-(EncodedCommand|enc)([ \t]|$)'
+    condition: selection_image and selection_command
+
+fields:
+    - Image
+    - CommandLine
+    - ParentImage
+    - User
+
+falsepositives:
+    - Legitimate administrative automation
+    - Authorized testing and troubleshooting
+    - Standalone indicator text appearing inside quoted arguments
+
+level: medium
+
+tags:
+    - attack.execution
+    - attack.t1059.001

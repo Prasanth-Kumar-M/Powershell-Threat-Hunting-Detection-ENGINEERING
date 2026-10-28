@@ -1,0 +1,2 @@
+(Image IN ("*\\powershell.exe", "*\\pwsh.exe"))
+| regex CommandLine="(?i)(^|[ \\t])-(EncodedCommand|enc)([ \\t]|$)" | table Image,CommandLine,ParentImage,User
