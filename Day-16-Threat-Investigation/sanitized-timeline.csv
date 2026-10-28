@@ -1,0 +1,3 @@
+"Stage","EventID","Process","ParentProcess","RelativeTime","EncodedIndicator"
+"Parent","1","powershell.exe","explorer.exe","T+0s","Not assessed"
+"Child","1","powershell.exe","powershell.exe","T+7156s","True"
