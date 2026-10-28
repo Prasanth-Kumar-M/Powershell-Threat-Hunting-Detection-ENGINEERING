@@ -1,0 +1,6 @@
+"TestId","Image","CommandLine","Expected"
+"T01","C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe","powershell.exe -EncodedCommand VABFAFMAVAA=","True"
+"T02","C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe","powershell.exe -NoProfile -Command Get-Date","False"
+"T03","C:\Windows\System32\notepad.exe","notepad.exe -EncodedCommand VABFAFMAVAA=","False"
+"T04","C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe","powershell.exe -enc VABFAFMAVAA=","True"
+"T05","C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe","powershell.exe -Command Write-Output ""example-EncodedCommand""","False"
